@@ -9,9 +9,11 @@ export default function Home() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { data: chatWithGeminiData, mutateAsync: chatWithGeminiFn, isPending } = useChatWithGemini();
 
+    const typeParams = searchParams.get("type");
+
     useEffect(() => {
-        chatWithGeminiFn(searchParams.get("type")??"matriz-quadrada");
-    }, [chatWithGeminiFn, searchParams.get("type")])
+        chatWithGeminiFn(typeParams??"matriz-quadrada");
+    }, [chatWithGeminiFn, typeParams]);
     
 
     const data: React.ReactNode | string = chatWithGeminiData
@@ -69,6 +71,17 @@ export default function Home() {
                         )   
                     )}
             </div>
+
+            <section className="mt-10">
+                <div className="w-fit grid grid-cols-3 border divide-x divide-y">
+                    <div className="h-10 w-10 flex items-center justify-center">1</div>
+                    <div className="h-10 w-10 flex items-center justify-center">2</div>
+                    <div className="h-10 w-10 flex items-center justify-center">3</div>
+                    <div className="h-10 w-10 flex items-center justify-center">4</div>
+                    <div className="h-10 w-10 flex items-center justify-center">5</div>
+                    <div className="h-10 w-10 flex items-center justify-center">6</div>
+                </div>
+            </section>
         </div>
     );
 }
